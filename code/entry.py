@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from scipy.stats import skew
+from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -94,13 +95,30 @@ def logistic_regression(X_train, X_test, y_train, y_test):
     print('test error:')
     print(np.mean(model.predict(X_test) != y_test))
 
+def gradient_boosting(X_train, X_test, y_train, y_test):
+    params = {
+        'max_depth': [3], # [3, 5, 7],
+        'learning_rate': [0.05], # [0.05, 0.1, 0.2],
+        'n_estimators': [100], # [75, 100, 125, 150],
+    }
+    model = GridSearchCV(estimator=XGBClassifier(), param_grid=params, cv=10)
+    model.fit(X_train, y_train)
+    print('best params:')
+    print(model.best_params_)
+    print('train error:')
+    print(np.mean(model.predict(X_train) != y_train))
+    print('test error:')
+    print(np.mean(model.predict(X_test) != y_test))
+
 path = '../data/framingham.csv'
 y_label = 'TenYearCHD'
 skew_exempted = ['education', 'currentSmoker', 'BPMeds', 'prevalentStroke', 'prevalentHyp', 'diabetes', 'TenYearCHD']
 
 X_train, X_test, y_train, y_test = readFile(path,y_label,skew_exempted)
+
 # random_forest(X_train, X_test, y_train, y_test)
 # KNN(X_train, X_test, y_train, y_test)
 # decision_tree(X_train, X_test, y_train, y_test)
 # SVM(X_train, X_test, y_train, y_test)
-logistic_regression(X_train, X_test, y_train, y_test)
+# logistic_regression(X_train, X_test, y_train, y_test)
+gradient_boosting(X_train, X_test, y_train, y_test)
