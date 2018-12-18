@@ -1,31 +1,13 @@
-import pandas as pd
 import numpy as np
-from scipy.stats import skew
+from fileIO import readFile
 from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
-
-def readFile(path,y_label,skew_exempted=[], training_ratio=0.7):
-    raw = pd.read_csv(path)
-    n, d = raw.shape
-    training_size = int(n * training_ratio)
-    # raw = raw.sample(frac=1).reset_index(drop=True)  # shuffle
-    skewed = raw[raw.dtypes[raw.dtypes != "object"].index.drop(skew_exempted)].apply(lambda x: skew(x.dropna()))
-    skewed = skewed[skewed > 0.75].index
-    # raw[skewed] = np.log1p(raw[skewed])  # reduce skewness
-    raw = pd.get_dummies(raw)  # encode categorical features
-    raw = raw.fillna(raw.mean())
-    train = raw[0:training_size]
-    test = raw[training_size:]
-    X_train = train.drop(y_label,axis=1)
-    X_test = test.drop(y_label,axis=1)
-    y_train = train[y_label]
-    y_test = test[y_label]
-    return X_train, X_test, y_train, y_test
 
 def random_forest(X_train, X_test, y_train, y_test):
     params = {
@@ -44,7 +26,7 @@ def random_forest(X_train, X_test, y_train, y_test):
 
 def KNN(X_train, X_test, y_train, y_test):
     params = {
-        'n_neighbors': [1,2,3]
+        'n_neighbors': [2], # [1,2,3]
     }
     model = GridSearchCV(estimator=KNeighborsClassifier(), param_grid=params, cv=10)
     model.fit(X_train, y_train)
@@ -57,7 +39,7 @@ def KNN(X_train, X_test, y_train, y_test):
 
 def decision_tree(X_train, X_test, y_train, y_test):
     params = {
-        'max_depth': [20,40,60,80,100,140,300,600,800,None]
+        'max_depth': [1], # [1,2,3,4,5,6,10,15,20,60,None]
     }
     model = GridSearchCV(estimator=DecisionTreeClassifier(max_depth=None), param_grid=params, cv=10)
     model.fit(X_train, y_train)
@@ -70,7 +52,7 @@ def decision_tree(X_train, X_test, y_train, y_test):
 
 def SVM(X_train, X_test, y_train, y_test):
     params = {
-        'C': [0.4,0.6,0.8,1.0,1.2,1.4]
+        'C': [0.1] # [0.1,0.2,0.3,0.4,0.6,0.8]
     }
     model = GridSearchCV(estimator=SVC(gamma='scale'), param_grid=params, cv=10)
     model.fit(X_train, y_train)
@@ -83,8 +65,8 @@ def SVM(X_train, X_test, y_train, y_test):
 
 def logistic_regression(X_train, X_test, y_train, y_test):
     params = {
-        'penalty': ['l1', 'l2'],
-        'C': [0.4,0.6,0.8,1.0,1.2,1.4]
+        'penalty': ['l1'], # ['l1', 'l2'],
+        'C': [1.0], # [0.4,0.6,0.8,1.0,1.2,1.4]
     }
     model = GridSearchCV(estimator=LogisticRegression(), param_grid=params, cv=10)
     model.fit(X_train, y_train)
@@ -97,11 +79,26 @@ def logistic_regression(X_train, X_test, y_train, y_test):
 
 def gradient_boosting(X_train, X_test, y_train, y_test):
     params = {
-        'max_depth': [3], # [3, 5, 7],
-        'learning_rate': [0.05], # [0.05, 0.1, 0.2],
+        'max_depth': [3], # [1, 2, 3, 5, 7],
+        'learning_rate': [0.03], # [0.01, 0.03, 0.05, 0.1, 0.2],
         'n_estimators': [100], # [75, 100, 125, 150],
     }
     model = GridSearchCV(estimator=XGBClassifier(), param_grid=params, cv=10)
+    model.fit(X_train, y_train)
+    print('best params:')
+    print(model.best_params_)
+    print('train error:')
+    print(np.mean(model.predict(X_train) != y_train))
+    print('test error:')
+    print(np.mean(model.predict(X_test) != y_test))
+
+def NN(X_train, X_test, y_train, y_test):
+    params = {
+        'hidden_layer_sizes': [(100)], # [(100), (50,50), (20,20,20)],
+        'solver': ['lbfgs'], # ['lbfgs', 'adam'],
+        'alpha': [0.001], # [0.0001, 0.001, 0.01, 0.1],
+    }
+    model = GridSearchCV(estimator=MLPClassifier(batch_size=100), param_grid=params, cv=10)
     model.fit(X_train, y_train)
     print('best params:')
     print(model.best_params_)
@@ -121,4 +118,5 @@ X_train, X_test, y_train, y_test = readFile(path,y_label,skew_exempted)
 # decision_tree(X_train, X_test, y_train, y_test)
 # SVM(X_train, X_test, y_train, y_test)
 # logistic_regression(X_train, X_test, y_train, y_test)
-gradient_boosting(X_train, X_test, y_train, y_test)
+# gradient_boosting(X_train, X_test, y_train, y_test)
+NN(X_train, X_test, y_train, y_test)
