@@ -21,8 +21,15 @@ def random_forest(X_train, X_test, y_train, y_test):
     print(model.best_params_)
     print('train error:')
     print(np.mean(model.predict(X_train) != y_train))
+    y_hat = model.predict(X_test)
     print('test error:')
-    print(np.mean(model.predict(X_test) != y_test))
+    print(np.mean(y_hat != y_test))
+    print('Sen:')
+    print(np.mean(y_test[y_hat==1]))
+    print('Spe:')
+    print(np.mean(y_test[y_hat==0] == 0))
+    print('Pa:')
+    print(np.mean(y_hat == y_test))
 
 def KNN(X_train, X_test, y_train, y_test):
     params = {
@@ -34,8 +41,15 @@ def KNN(X_train, X_test, y_train, y_test):
     print(model.best_params_)
     print('train error:')
     print(np.mean(model.predict(X_train) != y_train))
+    y_hat = model.predict(X_test)
     print('test error:')
-    print(np.mean(model.predict(X_test) != y_test))
+    print(np.mean(y_hat != y_test))
+    print('Sen:')
+    print(np.mean(y_test[y_hat==1]))
+    print('Spe:')
+    print(np.mean(y_test[y_hat==0] == 0))
+    print('Pa:')
+    print(np.mean(y_hat == y_test))
 
 def decision_tree(X_train, X_test, y_train, y_test):
     params = {
@@ -47,16 +61,23 @@ def decision_tree(X_train, X_test, y_train, y_test):
     print(model.best_params_)
     print('train error:')
     print(np.mean(model.predict(X_train) != y_train))
+    y_hat = model.predict(X_test)
     print('test error:')
-    print(np.mean(model.predict(X_test) != y_test))
+    print(np.mean(y_hat != y_test))
+    print('Sen:')
+    print(np.mean(y_test[y_hat==1]))
+    print('Spe:')
+    print(np.mean(y_test[y_hat==0] == 0))
+    print('Pa:')
+    print(np.mean(y_hat == y_test))
 
 def SVM(X_train, X_test, y_train, y_test):
     params = {
         'C': [0.1], # [0.1,0.2,0.3,0.4,0.6,0.8]
-        'kernel': ['linear'],
+        'kernel': ['rbf'],
     }
     # model = GridSearchCV(estimator=SVC(gamma='scale'), param_grid=params, cv=10)
-    model = SVC(gamma='scale', kernel='linear')
+    model = SVC(gamma='scale', kernel='rbf')
     model.fit(X_train, y_train)
 
     # print('best params:')
@@ -85,8 +106,15 @@ def logistic_regression(X_train, X_test, y_train, y_test):
     print(model.best_params_)
     print('train error:')
     print(np.mean(model.predict(X_train) != y_train))
+    y_hat = model.predict(X_test)
     print('test error:')
-    print(np.mean(model.predict(X_test) != y_test))
+    print(np.mean(y_hat != y_test))
+    print('Sen:')
+    print(np.mean(y_test[y_hat==1]))
+    print('Spe:')
+    print(np.mean(y_test[y_hat==0] == 0))
+    print('Pa:')
+    print(np.mean(y_hat == y_test))
 
 def gradient_boosting(X_train, X_test, y_train, y_test):
     params = {
@@ -100,8 +128,15 @@ def gradient_boosting(X_train, X_test, y_train, y_test):
     print(model.best_params_)
     print('train error:')
     print(np.mean(model.predict(X_train) != y_train))
+    y_hat = model.predict(X_test)
     print('test error:')
-    print(np.mean(model.predict(X_test) != y_test))
+    print(np.mean(y_hat != y_test))
+    print('Sen:')
+    print(np.mean(y_test[y_hat==1]))
+    print('Spe:')
+    print(np.mean(y_test[y_hat==0] == 0))
+    print('Pa:')
+    print(np.mean(y_hat == y_test))
 
 def NN(X_train, X_test, y_train, y_test):
     params = {
@@ -118,6 +153,12 @@ def NN(X_train, X_test, y_train, y_test):
     y_hat = model.predict(X_test)
     print('test error:')
     print(np.mean(y_hat != y_test))
+    print('Sen:')
+    print(np.mean(y_test[y_hat==1]))
+    print('Spe:')
+    print(np.mean(y_test[y_hat==0] == 0))
+    print('Pa:')
+    print(np.mean(y_hat == y_test))
 
 # path = '../data/framingham.csv'
 # y_label = 'TenYearCHD'
@@ -130,12 +171,12 @@ path = '../data/salary.csv'
 y_label = 'salary'
 encode_features = ['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country']
 
-X_train, X_test, y_train, y_test = readFile(path=path, y_label=y_label, encode_features=encode_features)
+X_train, X_test, y_train, y_test = readFile(path=path, y_label=y_label, encode_features=encode_features, training_ratio=0.7)
 
 # random_forest(X_train, X_test, y_train, y_test)
 # KNN(X_train, X_test, y_train, y_test)
 # decision_tree(X_train, X_test, y_train, y_test)
-SVM(X_train, X_test, y_train, y_test)
+# SVM(X_train, X_test, y_train, y_test)
 # logistic_regression(X_train, X_test, y_train, y_test)
 # gradient_boosting(X_train, X_test, y_train, y_test)
-# NN(X_train, X_test, y_train, y_test)
+NN(X_train, X_test, y_train, y_test)
