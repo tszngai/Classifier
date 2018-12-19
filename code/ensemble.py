@@ -37,9 +37,10 @@ def fitEnsemble(Z, y):
 
 path = '../data/framingham.csv'
 y_label = 'TenYearCHD'
+encode_features = ['male', 'education', 'currentSmoker', 'BPMeds', 'prevalentStroke', 'prevalentHyp', 'diabetes']
 skew_exempted = ['education', 'currentSmoker', 'BPMeds', 'prevalentStroke', 'prevalentHyp', 'diabetes', 'TenYearCHD']
 
-X_train, X_test, y_train, y_test = readFile(path,y_label,skew_exempted)
+X_train, X_test, y_train, y_test = readFile(path=path, y_label=y_label, encode_features=encode_features, skew_exempted=skew_exempted)
 # y_train[y_train == 0] = -1
 # y_test[y_test == 0] = -1
 

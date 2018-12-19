@@ -52,16 +52,27 @@ def decision_tree(X_train, X_test, y_train, y_test):
 
 def SVM(X_train, X_test, y_train, y_test):
     params = {
-        'C': [0.1] # [0.1,0.2,0.3,0.4,0.6,0.8]
+        'C': [0.1], # [0.1,0.2,0.3,0.4,0.6,0.8]
+        'kernel': ['linear'],
     }
-    model = GridSearchCV(estimator=SVC(gamma='scale'), param_grid=params, cv=10)
+    # model = GridSearchCV(estimator=SVC(gamma='scale'), param_grid=params, cv=10)
+    model = SVC(gamma='scale', kernel='linear')
     model.fit(X_train, y_train)
-    print('best params:')
-    print(model.best_params_)
+
+    # print('best params:')
+    # print(model.best_params_)
+    
     print('train error:')
     print(np.mean(model.predict(X_train) != y_train))
+    y_hat = model.predict(X_test)
     print('test error:')
-    print(np.mean(model.predict(X_test) != y_test))
+    print(np.mean(y_hat != y_test))
+    print('Sen:')
+    print(np.mean(y_test[y_hat==1]))
+    print('Spe:')
+    print(np.mean(y_test[y_hat==0] == 0))
+    print('Pa:')
+    print(np.mean(y_hat == y_test))
 
 def logistic_regression(X_train, X_test, y_train, y_test):
     params = {
@@ -104,19 +115,27 @@ def NN(X_train, X_test, y_train, y_test):
     print(model.best_params_)
     print('train error:')
     print(np.mean(model.predict(X_train) != y_train))
+    y_hat = model.predict(X_test)
     print('test error:')
-    print(np.mean(model.predict(X_test) != y_test))
+    print(np.mean(y_hat != y_test))
 
-path = '../data/framingham.csv'
-y_label = 'TenYearCHD'
-skew_exempted = ['education', 'currentSmoker', 'BPMeds', 'prevalentStroke', 'prevalentHyp', 'diabetes', 'TenYearCHD']
+# path = '../data/framingham.csv'
+# y_label = 'TenYearCHD'
+# encode_features = ['male', 'education', 'currentSmoker', 'BPMeds', 'prevalentStroke', 'prevalentHyp', 'diabetes']
+# skew_exempted = ['education', 'currentSmoker', 'BPMeds', 'prevalentStroke', 'prevalentHyp', 'diabetes', 'TenYearCHD']
 
-X_train, X_test, y_train, y_test = readFile(path,y_label,skew_exempted)
+# X_train, X_test, y_train, y_test = readFile(path=path, y_label=y_label, encode_features=encode_features, skew_exempted=skew_exempted)
+
+path = '../data/salary.csv'
+y_label = 'salary'
+encode_features = ['workclass', 'education', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country']
+
+X_train, X_test, y_train, y_test = readFile(path=path, y_label=y_label, encode_features=encode_features)
 
 # random_forest(X_train, X_test, y_train, y_test)
 # KNN(X_train, X_test, y_train, y_test)
 # decision_tree(X_train, X_test, y_train, y_test)
-# SVM(X_train, X_test, y_train, y_test)
+SVM(X_train, X_test, y_train, y_test)
 # logistic_regression(X_train, X_test, y_train, y_test)
 # gradient_boosting(X_train, X_test, y_train, y_test)
-NN(X_train, X_test, y_train, y_test)
+# NN(X_train, X_test, y_train, y_test)

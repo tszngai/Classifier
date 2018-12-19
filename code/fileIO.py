@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from scipy.stats import skew
 
-def readFile(path,y_label,skew_exempted=[], training_ratio=0.7, shuffle=True, needSkew=False):
+def readFile(path, y_label, encode_features=[], skew_exempted=[], training_ratio=0.7, shuffle=True, needSkew=False):
     raw = pd.read_csv(path)
     n, d = raw.shape
     training_size = int(n * training_ratio)
@@ -15,7 +15,7 @@ def readFile(path,y_label,skew_exempted=[], training_ratio=0.7, shuffle=True, ne
         skewed = skewed[skewed > 0.75].index
         raw[skewed] = np.log1p(raw[skewed])  # reduce skewness
     
-    raw = pd.get_dummies(raw)  # encode categorical features
+    raw = pd.get_dummies(raw, columns=encode_features)  # encode categorical features
     raw = raw.fillna(raw.mean())
     train = raw[0:training_size]
     test = raw[training_size:]
