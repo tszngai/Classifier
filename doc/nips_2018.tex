@@ -118,6 +118,17 @@ The major challenge for this data set is the imbalance of its binary label. Ther
   \end{tabular}
 \end{table}
 
+\subsection{Mearsure of Performance}
+\label{measure_of_performance}
+
+In order to compare different algorithms, it is necessary to first define the measure of performance. In the sense of binary classification, predictions can be categorized into four different types: true positive (TP), false positive (FP), true negative (TN) and false negative (FP). In different applictions, performance can be measured using different formulae. The following three are the most used formulae in binary classification:\\
+\begin{center}
+\hfill$Sensitivity=\frac{TP}{TP+FP}$\hfill (1)\\\hfill\\
+\hfill$Specificity=\frac{TN}{TN+FN}$\hfill (2)\\\hfill\\
+\hfill$Predictive Accuracy=\frac{TP+TN}{TP+FP+TN+FN}$\hfill (3)\\
+\end{center}
+$Sensitivity$ focuses on the model's accuracy on its positive predictions whereas $Specificity$ focuses on negative predictions. $Predictive Accuracy$ on the other hand, can be used to measure the general accuracy of the model over both positive and negative predictions. In this experiments, performance of different algoritms is compared using all three of the measures.
+
 \subsection{Undersampling}
 \label{undersampling}
 

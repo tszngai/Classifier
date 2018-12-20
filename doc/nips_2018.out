@@ -4,14 +4,15 @@
 \BOOKMARK [1][-]{section.2}{Related Work}{}% 4
 \BOOKMARK [1][-]{section.3}{Descriptions and Justifications}{}% 5
 \BOOKMARK [2][-]{subsection.3.1}{Data Set Settings}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.2}{Undersampling}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.3}{Oversampling}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.4}{Class Weighting}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.5}{Ensemble}{section.3}% 10
-\BOOKMARK [1][-]{section.4}{Experiments}{}% 11
-\BOOKMARK [2][-]{subsection.4.1}{sub}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.2}{sub}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.3}{sub}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.4}{sub}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{Discussion}{}% 16
-\BOOKMARK [2][-]{subsection.5.1}{sub}{section.5}% 17
+\BOOKMARK [2][-]{subsection.3.2}{Mearsure of Performance}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{Undersampling}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{Oversampling}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{Class Weighting}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.6}{Ensemble}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Experiments}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{sub}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{sub}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{sub}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.4}{sub}{section.4}% 16
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 17
+\BOOKMARK [2][-]{subsection.5.1}{sub}{section.5}% 18
