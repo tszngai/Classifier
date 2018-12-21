@@ -89,7 +89,7 @@ To boost up the accuracy of a model and minimize the effect of imbalanced data o
 
 \subsection{Data Set Settings}
 The data set is drawn from the UCI Machine Learning Repository and is publicly known as the $Adult$ data set. It contains general information of 48843 individuals and whether or not they make more than 50K every year. The goal is to build a model that can accurately predict the annual income ($>50K$ or $<=50K$) of a given person based on this data set. As shown in Table~\ref{attributes}, the data set contains a mixture of categorical and numerical features for each entry. Therefore, data pre-processing techniques should be applied to enable further study on the data. Specifically, feature selecion algorithms could help decide which features are relevant to the prediction. In addition, the label $salary$ is a binary attribute of the individual's income being either $>50K$ or $<=50K$, which makes it an ideal binary classification problems.\\\\
-The major challenge for this data set is the imbalance of its binary label. There are only 11687 positive ($>50K$) labels out of 48843 entries in total, which makes up $23.9\%$ of the whole data set. Models trained on imbalanced data set tend to make prediction of the majority class. For example, consider a data set consisting $10000$ entries of class $A$ and $100$ entries of class $B$. Then the model could get 90\% of training accuracy by simply predicting everything as class $A$. The following sections discuss several methods to handle imbalanced data set, including previous efforts that has been made to tackle this problem in particular, as well as additional machne learning techniques that could also be applied.
+The major challenge for this data set is the imbalance of its binary label. There are only 11687 positive ($>50K$) labels out of 48843 entries in total, which makes up $23.9\%$ of the whole data set. Models trained on imbalanced data set tend to make prediction of the majority class. For example, consider a data set consisting $10000$ entries of class $A$ and $100$ entries of class $B$. The model could get 90\% of training accuracy by simply predicting everything as class $A$. The following sections discuss several methods to handle imbalanced data set, including previous efforts that has been made to study this data set, as well as other machine learning techniques that could also be applied.
 
 \begin{table}
   \caption{Data Set Attributes}
@@ -121,62 +121,134 @@ The major challenge for this data set is the imbalance of its binary label. Ther
 \subsection{Mearsure of Performance}
 \label{measure_of_performance}
 
-In order to compare different algorithms, it is necessary to first define the measure of performance. In the sense of binary classification, predictions can be categorized into four different types: true positive (TP), false positive (FP), true negative (TN) and false negative (FP). In different applictions, performance can be measured using different formulae. The following three are the most used formulae in binary classification:\\
+In order to compare different algorithms, let us first define the measure of performance. In the sense of binary classification, predictions can be categorized into four different types: true positive (TP), false positive (FP), true negative (TN) and false negative (FP). In different applictions, performance can be measured using different formulae. The following three are the most used formulae in binary classification:\\
 \begin{center}
-\hfill$Sensitivity=\frac{TP}{TP+FP}$\hfill (1)\\\hfill\\
-\hfill$Specificity=\frac{TN}{TN+FN}$\hfill (2)\\\hfill\\
-\hfill$Predictive Accuracy=\frac{TP+TN}{TP+FP+TN+FN}$\hfill (3)\\
+\hfill$Sensitivity (SEN)=\frac{TP}{TP+FP}$\hfill (1)\\\hfill\\
+\hfill$Specificity (SPE)=\frac{TN}{TN+FN}$\hfill (2)\\\hfill\\
+\hfill$Predictive Accuracy (PA)=\frac{TP+TN}{TP+FP+TN+FN}$\hfill (3)\\
 \end{center}
-$Sensitivity$ focuses on the model's accuracy on its positive predictions whereas $Specificity$ focuses on negative predictions. $Predictive Accuracy$ on the other hand, can be used to measure the general accuracy of the model over both positive and negative predictions. In this experiments, performance of different algoritms is compared using all three of the measures.
+$Sensitivity$ focuses on the model's accuracy on its positive predictions whereas $specificity$ focuses on negative predictions. $Predictive accuracy$ on the other hand, is used to measure the general accuracy of the model over both positive and negative predictions. In this experiments, we compare the performance of different algoritms using all three of the measures.
 
 \subsection{Undersampling}
 \label{undersampling}
 
-One of the most popular methods to handle imbalanced data sets is data undersampling, in which entries are randomly sampled from the majority class. Only a portion of the majority class are collected such that the size of the sampled majority class is the same as the minority class. Inouye (2018) has implemented such sampling method to the $Adult$ data set to randomly generate a subset of sample with income $<=50K$ and simply discarded the rest. This approach usually works relatively well, however, massive amount of data is discarded and the resulted model would not be able to reflect the comlete data set. Next section introduces an alternative method that could fully utilize every entry of the data set to build the model.
+One of the most popular methods in handling imbalanced data sets is data undersampling, in which entries are randomly sampled from the majority class. Only a portion of the majority class are collected such that the size of the sampled majority class is the same as the minority class. Inouye (2018) has implemented such sampling method to the $Adult$ data set. He randomly generated a subset of sample with income $<=50K$ and simply discarded the rest. This approach usually works relatively well, however, massive amount of data is discarded and the resulted model would not be able to reflect the comlete data set. Next section introduces an alternative method that could potentially utilize every entry of the data set to build the model.
 
 \subsection{Oversampling}
 \label{oversampling}
 
-As an alternative to the undersampling method, oversampling "creates" new entries of the minority class to match the size of majority class. The simplest way to oversample is to duplicate the minority class multiple times. There are, however, more sophisticated oversampling algorithms, such as SMOTE and ADASYN, that can create synthetic data points as oppose to duplicating original entries. The particular algorithm used in this experiment is ADASYN, which randomly generates a data point based on $k$ nearest neighbors with more weights are attributed to data points that are harder to learn. Both undersampling and oversampling are types of data pre-processing methods solve imbalance problems. Next section introduces another technique that could be applied in the training phase of model fitting.
+As an alternative to the undersampling method, oversampling "creates" new entries of the minority class to match the size of majority class. The simplest way to oversample is to duplicate the minority class multiple times. However, there are more sophisticated oversampling algorithms, such as SMOTE and ADASYN, that can create synthetic data points as oppose to duplicating original entries. The particular algorithm used in this experiment is ADASYN, which randomly generates a data point based on $k$ nearest neighbors. In addition, ADASYN attributes more weights to data points that are harder to learn. Both undersampling and oversampling are types of data pre-processing methods to solve imbalance problems. Next section introduces another technique that could be applied in the training phase of model fitting.
 
 \subsection{Class Weighting}
 \label{class_weighting}
 
-Class weighting is a method that assigns more weights on samples with important classes so that the model focuses more on one class than the other during training. This method can also be applied to imbalanced data set so the model would focus more on the minority class. Lo, et al. (2008) applied Class-Balanced SVM (CB-SVM) to solve imbalanced problems, in which different weights are assigned to each class as an effort of preventing the model from favoring majority class. Similarly, class weighting is also conducted in this experiment using the $svm$ module in $scikit-learn$ package. The specific function used, $SVC$, provides interface that allows users to specify weights for each class through the parameter $class\_weight$, which has greatly facilitated this experiment.
+Class weighting is a method that assigns more weights on important classes so that the model focuses more on one class than the other during training. This method can also be applied to imbalanced data set so the model would focus more on the minority class. Lo, et al. (2008) applied class-balanced support vector machine (CB-SVM) to solve imbalanced problems. They assigned different weights to each class to prevent the model from favoring majority class. Similarly, class weighting is also conducted in this experiment using the $svm$ module in $scikit-learn$ package. The specific function used, $SVC$, allows users to specify weights for each class through the parameter $class\_weight$.
 
 \subsection{Ensemble}
 \label{ensemble}
 
-Another approach that could potentially enhance the performance is model ensembling. In general it could help reduce the training error and/or approximation error of problems in a variety of domains, rather than just imbalanced data set. However, seldom have applied ensemble method to the $adult$ data set. In this experiment, ensemble methods are used as an attempt to reduce false predictions of the model. Specifically, stacking ensemble method is used in which outputs of a series of heterogeneous machine learning models are gathered as inputs to train a logistic regression model. Predictions are made from the output of this stacking model. Section~\ref{experiments} discusses in detail how different techniques, including ensemble methods, would impact on the performance.
+Another approach that could potentially enhance the performance is model ensembling. In general it could help reduce the training error and/or approximation error of a variety of problems. However, seldom have applied ensemble method to the $adult$ data set. In this experiment, we apply ensemble method to reduce false predictions of the model. Specifically, we gather the outputs of a serie of heterogeneous machine learning models and train another logistic regression model based on these outputs. This is known as the stacking ensemble method. Section~\ref{experiments} discusses in detail how different techniques, including ensemble methods, would impact on the performance.
 
 \section{Experiments}
 \label{experiments}
 
-This is experiments section.
+We have done two experiments to study the effects of data balancing techniques and ensemble methods on performance. All hyper-parameters used in this section are determined using 10-fold cross validation. After shuffling the raw data set, we devide it into training set and testing set by a ratio of $7:3$. All algorithms use the same training set and test set for comparison purposes.
 
-\subsection{sub}
+\subsection{Data Balancing Techniques}
+\label{balancing_experiment}
 
-This is a good sub section.
+The first experiment is to compare the performance of models after applying three different data balancing techniques as previously introduced: undersampling, oversampling and class weighting. In order to study only the effects of these techniques, we have controlled as many variables as possible. All three techniques use the same $adult$ data set and same machine learning algorithms with the same hyper-parameters. In order to better observe how each technique influence the result, we conduct another control group in which no data balancing techniques are used. See Table~\ref{balancing} for the performance of each algorithms using different balancing techniques. As introduced in Section~\ref{measure_of_performance}, binary classification models can be measured using SEN, SPE and PA. The corresponding scores are presented in the table.\\
 
-\subsection{sub}
+As shown,
 
-This is a good sub section.
+\begin{table}
+  \caption{Data Balancing Techniques}
+  \label{balancing}
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    Algorithm & 
+    	\begin{tabular}{llll}
+    		\hfil Undersampling&\hfil Oversampling&\hfil Class Weighting&\hfil None\\
+    		\midrule
+    		\begin{tabular}{lll} SEN&SPE&PA \end{tabular}&
+    		\begin{tabular}{lll} SEN&SPE&PA \end{tabular}&
+    		\begin{tabular}{lll} SEN&SPE&PA \end{tabular}&
+    		\begin{tabular}{lll} SEN&SPE&PA \end{tabular}
+    	\end{tabular}\\
+    \midrule
+    Age &\begin{tabular}{llll}
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988888&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}
+    \end{tabular}\\
+    
+    Age &\begin{tabular}{llll}
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988888&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}
+    \end{tabular}\\
+    
+    Age &\begin{tabular}{llll}
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988888&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}
+    \end{tabular}\\
+    
+    Age &\begin{tabular}{llll}
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988888&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}
+    \end{tabular}\\
+    
+    Age &\begin{tabular}{llll}
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988888&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}&
+    	\begin{tabular}{lll} 999&988&100 \end{tabular}
+    \end{tabular}\\
+    
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\subsection{sub}
+\subsection{Ensemble Method}
 
-This is a good sub section.
+The second experiment explores how ensemble method can affect the model performance. From the result of Section~\ref{balancing_experiment}, we determine that ??? performs the best in this binary data set. Therefore ??? is used in both groups of this experiment in order to control experimental factors. Similar to the previous part, models are compared in three different matrices SEN, SPE and PA.
 
-\subsection{sub}
-
-This is a good sub section.
+\begin{table}
+  \caption{Ensemble vs. Single Models}
+  \label{ensemble_table}
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    Model     & \begin{tabular}{lll} SEN&SPE&PA \end{tabular} \\
+    \midrule
+    Stacking Ensemble& \begin{tabular}{lll} 9999&9999&8888 \end{tabular} \\
+    Model     & \begin{tabular}{lll} SEN&SPE&PA \end{tabular} \\
+    Model     & \begin{tabular}{lll} SEN&SPE&PA \end{tabular} \\
+    Model     & \begin{tabular}{lll} SEN&SPE&PA \end{tabular} \\
+    Model     & \begin{tabular}{lll} SEN&SPE&PA \end{tabular} \\
+    Model     & \begin{tabular}{lll} SEN&SPE&PA \end{tabular} \\
+    Model     & \begin{tabular}{lll} SEN&SPE&PA \end{tabular} \\
+    Model     & \begin{tabular}{lll} SEN&SPE&PA \end{tabular} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \section{Discussion}
 
-This is discussion section.
+This is the conclusion.\\
 
-\subsection{sub}
+One of the major contribution of this experiment is that our work has provided some insights to the performance of different balancing techniques.
 
-This is a good sub section.
+In the ensemble experiment, we only used ??? in both groups to control experimental factors. However this might neglect the possibility that a diiferent balancing technique might make a difference in the ensemble results. If time permits, one possible improvement is to conduct ensembling to all balancing techniques and study their difference.
+
+Another potential future improvement is to expand the experiment to more data sets that have different imbalance ratio. This could help explore how balancing techniques and ensemble methods would perform differently with different imbalance ratio.
 
 \section*{References}
 
