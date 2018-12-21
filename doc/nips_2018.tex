@@ -12,12 +12,14 @@
 %     \usepackage[preprint]{neurips_2018}
 
 % to compile a camera-ready version, add the [final] option, e.g.:
-     \usepackage[final]{nips_2018}
+     \usepackage[final]{neurips_2018}
 
 % to avoid loading the natbib package, add option nonatbib:
 %     \usepackage[nonatbib]{neurips_2018}
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage{natbib}
+\setcitestyle{sort&compress}
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
 \usepackage{hyperref}       % hyperlinks
 \usepackage{url}            % simple URL typesetting
@@ -26,6 +28,7 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{graphicx}      % microtypography
+\bibliographystyle{abbrvnat}
 
 \title{Exploring Different Approaches to Improve Binary Classification Performance for Imbalanced Data Set}
 
@@ -89,11 +92,11 @@ This is related work section.
 To boost up the accuracy of a model and minimize the effect of imbalanced data on the performance, there are several possible solutions, including undersampling, oversampling and class weighting. However, seldom have studied the difference in these approaches. The motivation of this experiment is to study how different machine learning techniques could have impact on the performance of models trained on imbalanced data set. The following sections discuss in detail the settings of the experiment and some of the approaches to tackle imbalanced problems.
 
 \subsection{Data Set Settings}
-The data set is drawn from the UCI Machine Learning Repository and is publicly known as the $Adult$ data set [1]. It contains general information of 48843 individuals and whether or not they make more than 50K every year. The goal is to build a model that can accurately predict the annual income ($>50K$ or $<=50K$) of a given person based on this data set. As shown in Table~\ref{attributes}, the data set contains a mixture of categorical and numerical features for each entry. Therefore, data pre-processing techniques should be applied to enable further study on the data. Specifically, feature selecion algorithms could help decide which features are relevant to the prediction. In addition, the label $salary$ is a binary attribute of the individual's income being either $>50K$ or $<=50K$, which makes it an ideal binary classification problems.\\\\
+The data set is drawn from the UCI Machine Learning Repository and is publicly known as the $Adult$ data set \citep{Adult}. It contains general information of 48843 individuals and whether or not they make more than 50K every year. The goal is to build a model that can accurately predict the annual income ($>50K$ or $<=50K$) of a given person based on this data set. As shown in Table~\ref{attributes}, the data set contains a mixture of categorical and numerical features for each entry. Therefore, data pre-processing techniques should be applied to enable further study on the data. Specifically, feature selecion algorithms could help decide which features are relevant to the prediction. In addition, the label $salary$ is a binary attribute of the individual's income being either $>50K$ or $<=50K$, which makes it an ideal binary classification problems.\\\\
 The major challenge for this data set is the imbalance of its binary label. There are only 11687 positive ($>50K$) labels out of 48843 entries in total, which makes up $23.9\%$ of the whole data set. Models trained on imbalanced data set tend to make prediction of the majority class. For example, consider a data set consisting $10000$ entries of class $A$ and $100$ entries of class $B$. The model could get 90\% of training accuracy by simply predicting everything as class $A$. The following sections discuss several methods to handle imbalanced data set, including previous efforts that has been made to study this data set, as well as other machine learning techniques that could also be applied.
 
 \begin{table}
-  \caption{$Adult$ Data Set Attributes [1]}
+  \caption{$Adult$ Data Set Attributes \citep{Adult}}
   \label{attributes}
   \centering
   \begin{tabular}{ll}
@@ -122,7 +125,7 @@ The major challenge for this data set is the imbalance of its binary label. Ther
 \subsection{Mearsure of Performance}
 \label{measure_of_performance}
 
-In order to compare different algorithms, let us first define the measure of performance. In the sense of binary classification, predictions can be categorized into four different types: true positive (TP), false positive (FP), true negative (TN) and false negative (FP). In different applictions, performance can be measured using different formulae. The following three are the most used formulae [4] in binary classification:\\
+In order to compare different algorithms, let us first define the measure of performance. In the sense of binary classification, predictions can be categorized into four different types: true positive (TP), false positive (FP), true negative (TN) and false negative (FP). In different applictions, performance can be measured using different formulae. The following three are the most used formulae \citep{binary} in binary classification:\\
 \begin{center}
 \hfill$Sensitivity (SEN)=\frac{TP}{TP+FP}$\hfill (1)\\\hfill\\
 \hfill$Specificity (SPE)=\frac{TN}{TN+FN}$\hfill (2)\\\hfill\\
@@ -133,17 +136,17 @@ $Sensitivity$ focuses on the model's accuracy on its positive predictions wherea
 \subsection{Undersampling}
 \label{undersampling}
 
-One of the most popular methods in handling imbalanced data sets is data undersampling, in which entries are randomly sampled from the majority class. Only a portion of the majority class are collected such that the size of the sampled majority class is the same as the minority class. Inouye (2018) has implemented such sampling method to the $Adult$ data set [5]. He randomly generated a subset of sample with income $<=50K$ and simply discarded the rest. This approach usually works relatively well, however, massive amount of data is discarded and the resulted model would not be able to reflect the comlete data set. Next section introduces an alternative method that could potentially utilize every entry of the data set to build the model.
+One of the most popular methods in handling imbalanced data sets is data undersampling, in which entries are randomly sampled from the majority class. Only a portion of the majority class are collected such that the size of the sampled majority class is the same as the minority class. \citet{Inouye} has implemented such sampling method to the $Adult$ data set. He randomly generated a subset of sample with income $<=50K$ and simply discarded the rest. This approach usually works relatively well, however, massive amount of data is discarded and the resulted model would not be able to reflect the comlete data set. Next section introduces an alternative method that could potentially utilize every entry of the data set to build the model.
 
 \subsection{Oversampling}
 \label{oversampling}
 
-As an alternative to the undersampling method, oversampling "creates" new entries of the minority class to match the size of majority class. The simplest way to oversample is to duplicate the minority class multiple times. However, there are more sophisticated oversampling algorithms, such as SMOTE and ADASYN, that can create synthetic data points as oppose to duplicating original entries. The particular algorithm used in this experiment is ADASYN, which randomly generates a data point based on $k$ nearest neighbors. In addition, ADASYN attributes more weights to data points that are harder to learn [3]. Both undersampling and oversampling are types of data pre-processing methods to solve imbalance problems. Next section introduces another technique that could be applied in the training phase of model fitting.
+As an alternative to the undersampling method, oversampling "creates" new entries of the minority class to match the size of majority class. The simplest way to oversample is to duplicate the minority class multiple times. However, there are more sophisticated oversampling algorithms, such as SMOTE and ADASYN, that can create synthetic data points as oppose to duplicating original entries. The particular algorithm used in this experiment is ADASYN, which randomly generates a data point based on $k$ nearest neighbors. In addition, ADASYN attributes more weights to data points that are harder to learn \citep{ADASYN}. Both undersampling and oversampling are types of data pre-processing methods to solve imbalance problems. Next section introduces another technique that could be applied in the training phase of model fitting.
 
 \subsection{Class Weighting}
 \label{class_weighting}
 
-Class weighting is a method that assigns more weights on important classes so that the model focuses more on one class than the other during training. This method can also be applied to imbalanced data set so the model would focus more on the minority class. Lo, et al. (2008) applied class-balanced support vector machine (CB-SVM) to solve imbalanced problems [2]. They assigned different weights to each class to prevent the model from favoring majority class. Similarly, class weighting is also conducted in this experiment using the $svm$ module in $scikit-learn$ package. The specific function used, $SVC$, allows users to specify weights for each class through the parameter $class\_weight$.
+Class weighting is a method that assigns more weights on important classes so that the model focuses more on one class than the other during training. This method can also be applied to imbalanced data set so the model would focus more on the minority class. \citet{CBSVM} applied class-balanced support vector machine (CB-SVM) to solve imbalanced problems. They assigned different weights to each class to prevent the model from favoring majority class. Similarly, class weighting is also conducted in this experiment using the $svm$ module in $scikit-learn$ package. The specific function used, $SVC$, allows users to specify weights for each class through the parameter $class\_weight$.
 
 \subsection{Ensemble}
 \label{ensemble}
@@ -279,32 +282,15 @@ The second experiment explores how ensemble method can affect the model performa
 
 \section{Discussion}
 
-Among all of the machine learning methods we tried so far, Random Forest, logistic regression and decision tree give us relatively better performance. However, we notice that adding balancing techniques doesn't improve the performance. For the different data balancing techniques, over sampling reaches better performance in all of the algorithms we tried except for SVM. However, the difference is not too significant. For ensemble methods, Stacking performs a little better than Averaging. \\
+Among all of the machine learning methods we tried so far, Random Forest, logistic regression and decision tree give us relatively better performance. However, we notice that adding balancing techniques doesn't improve the performance. For the different data balancing techniques, over sampling reaches better performance in all of the algorithms we tried except for SVM. However, the difference is not too significant. For ensemble methods, Stacking performs a little better than Averaging.\\
 
 One of the major contribution of this experiment is that our work has provided some insights to the performance of different balancing techniques.
 
 In the ensemble experiment, we only used Over Sampling in both groups to control experimental factors. However this might neglect the possibility that a diiferent balancing technique might make a difference in the ensemble results. If time permits, one possible improvement is to conduct ensembling to all balancing techniques and study their difference.
 
 Another potential future improvement is to expand the experiment to more data sets that have different imbalance ratio. This could help explore how balancing techniques and ensemble methods would perform differently with different imbalance ratio.
-
-\section*{References}
-
 \medskip
 
-\small
-
-[1] Kohavi, R.\ \& Becker, B.\ (1996) Adult Data Set.\ {\it UC Irvine Machine Learning Repository},
-pp.\ University of California.
-
-[2] Lo, H.Y.\ et al.\ (2008) Learning to Improve Area-Under-FROC for Imbalanced Medical Data Classification Using an Ensemble Method.\ {\it SIGKDD Explorations},
-10(2)\ 43--46.
-
-[3] He, H.\ et al.\ (2008) ADASYN: Adaptive Synthetic Sampling Approach for Imbalanced
-Learning.\ {\it 2008 International Joint Conference on Neural Networks}, 978-1-4244-1821-3/08. Universidad de Granada.
-
-[4] Zhou, L.\ \& Lai, K.K.\ (2009) Benchmarking binary classification models on data sets with different degrees of imbalance.\ {\it Front. Comput. Sci. China 2009},
-3(2)\ 205--216.
-
-[5] Inouye, S.\ (2018) Census Income Classification in R.\ {\it Inertia7}.
+\bibliography{ref.bib}
 
 \end{document}
