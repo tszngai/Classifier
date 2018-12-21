@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1545419204 "nips_2018.tex" "nips_2018.pdf" "nips_2018" 1545419205
+["pdflatex"] 1545423131 "nips_2018.tex" "nips_2018.pdf" "nips_2018" 1545423132
   "/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1480098666 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -81,12 +81,12 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1523934516 4220280 10cab8fbd7c5a7c52aba9917e190d018 ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "nips_2018.aux" 1545419204 3246 07be7cf766037e996dfe7f76067b5b51 ""
-  "nips_2018.out" 1545419204 881 fdee1e4a1b2d4c68df1ad5dff5ab6a75 ""
+  "nips_2018.aux" 1545423132 3246 07be7cf766037e996dfe7f76067b5b51 ""
+  "nips_2018.out" 1545423132 881 fdee1e4a1b2d4c68df1ad5dff5ab6a75 ""
   "nips_2018.sty" 1545372937 11053 f0efd02b196303a37b6b219b056a3ade ""
-  "nips_2018.tex" 1545419204 17543 373e34ca324b5c07aa6af958a43b58cb ""
+  "nips_2018.tex" 1545423131 18091 6af3c0d87731e060e3394ca7449146af ""
   (generated)
-  "nips_2018.aux"
-  "nips_2018.out"
   "nips_2018.pdf"
   "nips_2018.log"
+  "nips_2018.out"
+  "nips_2018.aux"

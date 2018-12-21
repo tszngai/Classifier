@@ -158,9 +158,9 @@ We have done two experiments to study the effects of data balancing techniques a
 \subsection{Data Balancing Techniques}
 \label{balancing_experiment}
 
-The first experiment is to compare the performance of models after applying three different data balancing techniques as previously introduced: undersampling, oversampling and class weighting. In order to study only the effects of these techniques, we have controlled as many variables as possible. All three techniques use the same $adult$ data set and same machine learning algorithms with the same hyper-parameters. In order to better observe how each technique influence the result, we conduct another control group in which no data balancing techniques are used. See Table~\ref{balancing} for the performance of each algorithms using different balancing techniques. As introduced in Section~\ref{measure_of_performance}, binary classification models can be measured using SEN, SPE and PA. The corresponding scores are presented in the table.\\
+The first experiment is to compare the performance of models after applying three different data balancing techniques as previously introduced: undersampling, oversampling and class weighting. In order to study only the effects of these techniques, we have controlled as many variables as possible. All three techniques use the same $adult$ data set and same machine learning algorithms with the same hyper-parameters. In order to better observe how each technique influence the result, we conduct another control group in which no data balancing techniques are used. See Table~\ref{balancing} for the performance of each algorithms using different balancing techniques. As introduced in Section~\ref{measure_of_performance}, binary classification models can be measured using SEN, SPE and PA. The corresponding scores are presented in the table \ref{balancing}. \\
 
-As shown,
+%As shown in taboe
 
 \begin{table}
   \caption{Data Balancing Techniques}
@@ -245,7 +245,7 @@ As shown,
     
     Neural Network &\begin{tabular}{llll}
       \begin{tabular}{lll}N/A&N/A&N/A \end{tabular}&
-      \begin{tabular}{lll} nan&76.3&76.3 \end{tabular}
+      \begin{tabular}{lll}N/A&76.3&76.3 \end{tabular}
     \end{tabular}\\
 
     SVM &\begin{tabular}{llll}
@@ -260,7 +260,7 @@ As shown,
 
 \subsection{Ensemble Method}
 
-The second experiment explores how ensemble method can affect the model performance. From the result of Section~\ref{balancing_experiment}, we determine that ??? performs the best in this binary data set. Therefore ??? is used in both groups of this experiment in order to control experimental factors. Similar to the previous part, models are compared in three different matrices SEN, SPE and PA.
+The second experiment explores how ensemble method can affect the model performance. From the result of Section~\ref{balancing_experiment}, we determine that Over Sampling performs better in most of the algorithms in this binary data set. Therefore Over Sampling is used in both groups of this experiment in order to control experimental factors. Similar to the previous part, models are compared in three different matrices SEN, SPE and PA.
 
 \begin{table}
   \caption{Ensemble vs. Single Models}
@@ -279,11 +279,11 @@ The second experiment explores how ensemble method can affect the model performa
 
 \section{Discussion}
 
-This is the conclusion.\\
+Among all of the machine learning methods we tried so far, Random Forest, logistic regression and decision tree give us relatively better performance. However, we notice that adding balancing techniques doesn't improve the performance. For the different data balancing techniques, over sampling reaches better performance in all of the algorithms we tried except for SVM. However, the difference is not too significant. For ensemble methods, Stacking performs a little better than Averaging. \\
 
 One of the major contribution of this experiment is that our work has provided some insights to the performance of different balancing techniques.
 
-In the ensemble experiment, we only used ??? in both groups to control experimental factors. However this might neglect the possibility that a diiferent balancing technique might make a difference in the ensemble results. If time permits, one possible improvement is to conduct ensembling to all balancing techniques and study their difference.
+In the ensemble experiment, we only used Over Sampling in both groups to control experimental factors. However this might neglect the possibility that a diiferent balancing technique might make a difference in the ensemble results. If time permits, one possible improvement is to conduct ensembling to all balancing techniques and study their difference.
 
 Another potential future improvement is to expand the experiment to more data sets that have different imbalance ratio. This could help explore how balancing techniques and ensemble methods would perform differently with different imbalance ratio.
 
