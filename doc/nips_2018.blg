@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: nips_2018.aux
 The style file: abbrvnat.bst
 Database file #1: ref.bib.bib
-You've used 5 entries,
+You've used 11 entries,
             2773 wiz_defined-function locations,
-            628 strings with 5510 characters,
-and the built_in function-call counts, 2712 in all, are:
-= -- 237
-> -- 193
-< -- 4
-+ -- 65
-- -- 60
-* -- 226
-:= -- 426
-add.period$ -- 17
-call.type$ -- 5
-change.case$ -- 35
-chr.to.int$ -- 5
-cite$ -- 10
-duplicate$ -- 105
-empty$ -- 188
-format.name$ -- 69
-if$ -- 557
+            670 strings with 6742 characters,
+and the built_in function-call counts, 5981 in all, are:
+= -- 529
+> -- 427
+< -- 6
++ -- 143
+- -- 132
+* -- 531
+:= -- 938
+add.period$ -- 37
+call.type$ -- 11
+change.case$ -- 77
+chr.to.int$ -- 11
+cite$ -- 22
+duplicate$ -- 229
+empty$ -- 421
+format.name$ -- 151
+if$ -- 1222
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 4
-newline$ -- 35
-num.names$ -- 20
-pop$ -- 68
+missing$ -- 10
+newline$ -- 67
+num.names$ -- 44
+pop$ -- 138
 preamble$ -- 1
-purify$ -- 30
+purify$ -- 66
 quote$ -- 0
-skip$ -- 98
+skip$ -- 198
 stack$ -- 0
-substring$ -- 86
-swap$ -- 14
+substring$ -- 218
+swap$ -- 20
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 55
+type$ -- 121
 warning$ -- 0
-while$ -- 22
+while$ -- 52
 width$ -- 0
-write$ -- 74
+write$ -- 156
