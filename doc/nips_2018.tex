@@ -63,25 +63,35 @@
 \maketitle
 
 \begin{abstract}
-  This is a good abstract.
+It is common to find imbalanced datasets in a wide range of applications in human society. With the development of modern machine learning and data science, the imbalanced feature of datasets is becoming more and more significant and meaningful in terms of binary classification. Therefore, exploring various approaches with higher accuracy for manipulating imbalanced datasets is a critical topic which should be focused on. In this work, we use multiple novel approaches in sampling\&modeling and compare the performance of handling imbalanced datasets with existing method for binary classification. In addition, we discuss relevant studies in this field in detail and compare our results with theirs, which would indicate a potential direction in the future.
 \end{abstract}
 
 \section{Introduction}
+which could often bring a convenient way of handling similar things efficiently in the future. Binary classification a typical and commonly used classification method. The performance of binary classification could have a profound influence for people’s daily life, such as credit risk assessment, medical diagnosis for patients [2], food quality evaluation, etc. However, the existing method of fitting imbalanced dataset for binary classification model would always have drawbacks. Because they barely combine the various ensemble methods and multiple sampling techniques together, although there are some works applying specific ensemble method into over/under sampling [3]. Therefore, there are some blank spaces in this field we can explore and compare to find an optimum approach for binary classification.
+\\\\It is self-evident that significance of binary classification is growing day by day in multiple areas of study. Mapping distribution, disturbance, wildlife habit, fire risk and climate change [4] are all relying on binary classification. What’s more, multiple classification problems could also be deduced as binary classification problems, such as one versus all classification which is as accurate as any other approach [5]. Nevertheless, the imbalanced data set would often result in a relative less accurate model. This concern is essential in real world applications as well, such as information retrieval, text categorization and filtering tasks [6].
+\\\\Through empirical analysis, we know that fitting the imbalanced dataset into machine learning(ML) models would always give various limitations and constraints. For the imbalanced datasets, how could people know the variations among those different techniques or ensemble model in terms of binary classification? Will the performance be improved if the best-performed sampling technique are utilized together to ensemble method? There are obviously some improvements and quantized comparisons can be presented to help people to select appropriate techniques and ensemble models.
+\\\\In this work, we firstly apply three techniques which are oversampling, undersampling and class weighting into our original dataset and derive three modified datasets. Based on these modified datasets, we respectively explore the performance of models with those three datasets and compare the results with existing work. Secondly, we use different ensemble methods with datasets and try to find the most suitable one. Finally, we combine the well-performed techniques and ensemble methods together to explore the framework with the best performance.
 
-This is instruction section.
-
-\subsection{sub}
-
-This is a good sub section.
-
-\subsection{sub}
-
-This is a good sub section.
 
 \section{Related Work}
-\label{related_work}
+\label{gen_inst}
+\subsection{Benchmarking binary classification models with different degrees of imbalanace}
 
-This is related work section.
+This paper mainly focus on handling the variation among a wide range of models and compare the accuracy (test error) between those models in terms of the degree of imbalance. We use the notation $x = (x_1, x_2,...,x_m)^T$ to represent the a set of $m$ variables that describe an instance. Each variable for a particular instance $k$ can be denoted by $x_k = (x_k1, x_k2,...,x_km)^T$ [2]. And the output $y_k \in \{-1, +1\}$. The degrees of imbalance determines how biased the dataset set could be for a binary classification. Based on the previous work of imbalanced dataset[7], this paper investigate the influence of degrees of imbalance for lots of models. However, this paper only simply use models to evaluate accuracy for imbalanced datasets. Besides ensemble models, our work includes more techniques such as oversampling, undersampling and class weighting.
+
+\subsection{Imbalanced datasets with SVM Ensembles}
+SVMs have gained remarkable success in a wide range of applications, in the imbalanced data context. This study proposed to combine integrated sampling techniques with an ensemble of SVMs[8]. The effects of class imbalance on SVMs have been conducted on this paper.
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{../fig/imbalanced_data.JPG}
+  \caption{Boundary changes wiht different imbalance ratios[8]}
+  \label{Boundary}
+\end{figure}
+\\\\From the Figure ~\ref{Boundary}, we can clearly see that the difference between ideal boundary and real boundary is moderate when the imbalanced ratio is relatively small [8]. Nevertheless, the boundaries move towards the minority class when the ratio is getting higher and higher. Given this phenomenon, the paper tries to solve this problem by using sampling techniques to balance the data.
+There are still some more spaces left for us to explore, although sampling techniques are used for this framework. Besides for sampling techniques, we still add class weighting method into our framework with different ensemble approaches. In this case, we make more comparisons and explorations under multiple conditions.
+
+\subsection{Using an ensemble method for imbalanced medical data classification}
+In this study, it mainly presents its solution for KDD Cup 2008 competition which aims at optimizing the detection for breast cancer [9]. Class-Balanced SVM is the main tool used in this study. Besides, this study exploited weighted-based classification method specifically for medical imbalanced dataset. This typical feature of medical dataset is that the number of samples is normally small and the dimensionality is high [10]. Therefore, this study tries to integrate SVM, AdaBoost and GA to solve imbalanced medical data problem. The ensemble method used in this paper [9] is adequate enough, whereas it doesn’t apply targeted pre-processing of data into framework. In our work, we pre-process that original dataset and apply multiple approaches to the model, such as undersampling, oversampling and class weighting.
 
 \section{Descriptions and Justifications}
 \label{headings}
