@@ -1,0 +1,82 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[A.Freeman and G.Moisen(2008)]{comparsion}
+E.~A.Freeman and G.~G.Moisen.
+\newblock A comparison of the performance of threshold criteria for binary
+  classification in terms of predicted prevalence and kappa.
+\newblock \emph{Ecological Modelling}, 217\penalty0 (3):\penalty0 45--48, 2008.
+\newblock \doi{https://doi.org/10.1016/j.ecolmodel.2008.05.015}.
+
+\bibitem[García et~al.(2004)García, Sánchez, Mollineda, Alejo, and
+  Sotoca]{pattern}
+V.~García, J.~Sánchez, R.~Mollineda, R.~Alejo, and J.~Sotoca.
+\newblock The class imbalance problem in pattern classification and learning.
+\newblock \emph{Pattern Analysis and Learning}, 66:\penalty0 56--60, 2004.
+
+\bibitem[He et~al.(2008)He, Bai, Garcia, and Li]{ADASYN}
+H.~He, Y.~Bai, E.~A. Garcia, and S.~Li.
+\newblock Adasyn: Adaptive synthetic sampling approach for imbalanced learning.
+\newblock \emph{Annalen der Physik}, pages 891--921, 2008.
+
+\bibitem[Inouye(2018)]{Inouye}
+S.~Inouye.
+\newblock Census income classification in r.
+\newblock \emph{Inertia 7}, 2018.
+\newblock URL \url{https://www.inertia7.com/projects/146}.
+
+\bibitem[J.Breuker et~al.(2007)J.Breuker, R.Dieng-Kuntz, N.Guarino, J.N.Kok,
+  J.Liu, deMantaras, R.Mizoguchi, M.Musen, and N.Zhong]{Classification}
+J.Breuker, R.Dieng-Kuntz, N.Guarino, J.N.Kok, J.Liu, R.~deMantaras,
+  R.Mizoguchi, M.Musen, and N.Zhong.
+\newblock Uperbised machine learning: A review of classification techniques.
+\newblock \emph{Frontiers in Artificial Intelligence and Applications},
+  160\penalty0 (2):\penalty0 1--2, 2007.
+
+\bibitem[Kohavi and Becker(1996)]{Adult}
+R.~Kohavi and B.~Becker.
+\newblock Adult data set, 1996.
+\newblock URL \url{https://archive.ics.uci.edu/ml/datasets/Adult}.
+
+\bibitem[Li et~al.(2011)Li, Liu, and C.Hu]{fuzzy}
+D.-C. Li, C.-W. Liu, and S.~C.Hu.
+\newblock A fuzzy-based data transformation for feature extraction to increase
+  classification performance with small medical data sets.
+\newblock \emph{Artificial Intelligence in Machine}, 52\penalty0 (1):\penalty0
+  45--52, 2011.
+\newblock \doi{https://doi.org/10.1016/j.artmed.2011.02.001}.
+
+\bibitem[Liu et~al.(2006)Liu, An, and Huang]{ensemble}
+Y.~Liu, A.~An, and X.~Huang.
+\newblock Boosting prediction accuracy on imbalanced datasets with svm
+  ensembles.
+\newblock \emph{Front. Comput. Sci. China}, 3918\penalty0 (2):\penalty0
+  107--108, 2006.
+
+\bibitem[Lo et~al.(2008)Lo, Chang, Chiang, Hsiao, Huang, Kuo, Lai, Yang, Yeh,
+  Yen, and Lin]{CBSVM}
+H.-Y. Lo, C.-M. Chang, T.-H. Chiang, C.-Y. Hsiao, A.~Huang, T.-T. Kuo, W.-C.
+  Lai, M.-H. Yang, J.-J. Yeh, C.-C. Yen, and S.-D. Lin.
+\newblock Learning to improve area-under-froc for imbalanced medical data
+  classification using an ensemble method.
+\newblock \emph{SIGKDD Explorations}, 10\penalty0 (2):\penalty0 43--46, 2008.
+
+\bibitem[Rifkin and Klautau(2006)]{onvsall}
+R.~Rifkin and A.~Klautau.
+\newblock In defense of one-vs-all classification.
+\newblock \emph{Machine Learning Research}, 5\penalty0 (3):\penalty0 101--103,
+  2006.
+
+\bibitem[Zhou and Lai(2009)]{binary}
+L.~Zhou and K.~K. Lai.
+\newblock Benchmarking binary classification models on data sets with different
+  degrees of imbalance.
+\newblock \emph{Front. Comput. Sci. China}, 3\penalty0 (2):\penalty0 205--216,
+  2009.
+\newblock \doi{http://dx.doi.org/10.1007/s11704-009-0027-1}.
+
+\end{thebibliography}
